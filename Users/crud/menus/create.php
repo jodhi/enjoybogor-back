@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Add Member</title>
+	<title>Add Menu</title>
 	
 	<style type="text/css">
 		fieldset
@@ -21,29 +21,25 @@
 <body>
 
 <fieldset>
-	<legend>Add Member</legend>
+	<legend>Add Menu</legend>
 	
 	<form action="php_action/create.php" method="post">
 		<table cellspacing="0" cellpadding="0">
 			<tr>
-				<th>Name</th>
-				<td><input type="text" name="user_name" placeholder="Name" /></td>
+				<th>Food Name</th>
+				<td><input type="text" name="food_name" placeholder="Food Name" /></td>
 			</tr>
 			<tr>
-				<th>Username</th>
-				<td><input type="text" name="username" placeholder="Username" /></td>
+				<th>Price</th>
+				<td><input type"text" name="price" placeholder="Price" /></td>
 			</tr>
 			<tr>
-				<th>Contact</th>
-				<td><input type="text" name="user_contact" placeholder="Contact" /></td>
+				<th>Portion Size</th>
+				<td><input type"text" name="portion_size" placeholder="Portion Size" /></td>
 			</tr>
 			<tr>
-				<th>E-mail</th>
-				<td><input type="email" name="email" placeholder="E-mail" /></td>
-			</tr>
-			<tr>
-				<th>Password</th>
-				<td><input type="password" name="password" placeholder="Password" /></td>
+				<th>Description</th>
+				<td><input type="textbox" name="menu_description" placeholder="Description" /></td>
 			</tr>
 			<tr>
 				<td><button type="submit">Create</button></td>

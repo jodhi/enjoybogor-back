@@ -8,7 +8,7 @@
 	<style type="text/css">
 		.manageMember
 		{
-			width: 50%;
+			width: 100%;
 			margin: auto;
 		}
 		
@@ -23,20 +23,20 @@
 <body>
 
 <div class="manageMember">
-	<a href="create.php"><button type="button">Add Member</button></a>
+	<a href="create.php"><button type="button">Add Menu</button></a>
 	<a href="../../home.php"><button type="button">Home</button></a>
 	<table border="1" cellspacing="0" cellpadding="0">
 		<thead>
 			<tr>
-				<th>Name</th>
-				<th>Contact</th>
-				<th>E-mail</th>
-				<th>Option</th>
+				<th>Food Name</th>
+				<th>Price</th>
+				<th>Portion Size</th>
+				<th>Description</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php
-			$sql = "SELECT * FROM users WHERE active = 1";
+			$sql = "SELECT * FROM menus WHERE active = 1";
 			$result = $connect->query($sql);
 			
 			if($result->num_rows >0)
@@ -45,13 +45,13 @@
 				{
 					echo "
 					<tr>
-						<td> ".$row['user_name']."</td>
-						<td> ".$row['username']."</td>
-						<td>".$row['user_contact']."</td>
-						<td>".$row['email']."</td>
+						<td> ".$row['food_name']."</td>
+						<td> ".$row['price']."</td>
+						<td> ".$row['portion_size']."</td>
+						<td> ".$row['menu_description']."</td>
 						<td>
-							<a href='edit.php?user_id=".$row['user_id']."'><button type='button'>Edit</button></a>
-							<a href='remove.php?user_id=".$row['user_id']."'><button type='button'>Remove</button></a>
+							<a href='edit.php?menu_id=".$row['menu_id']."'><button type='button'>Edit</button></a>
+							<a href='remove.php?menu_id=".$row['menu_id']."'><button type='button'>Remove</button></a>
 						</td>
 					</tr>";
 				}

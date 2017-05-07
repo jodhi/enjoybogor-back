@@ -1,4 +1,4 @@
-<?php require_once '../../connect/db_connect.php'; ?>
+<?php require_once '../../../connect/db_connect.php'; ?>
 
 <!DOCTYPE html>
 <html>
@@ -36,7 +36,8 @@
 		</thead>
 		<tbody>
 			<?php
-			$sql = "SELECT * FROM users WHERE active = 1";
+			$search = $_POST['search'];
+			$sql = "SELECT * FROM restaurants WHERE (restaurant_name LIKE '%".$search."%' OR restaurant_address LIKE '%".$search."%' OR restaurant_category LIKE '%".$search."%' OR restaurant_description LIKE '%".$search."%') AND active = 2";
 			$result = $connect->query($sql);
 			
 			if($result->num_rows >0)
@@ -45,14 +46,10 @@
 				{
 					echo "
 					<tr>
-						<td> ".$row['user_name']."</td>
-						<td> ".$row['username']."</td>
-						<td>".$row['user_contact']."</td>
-						<td>".$row['email']."</td>
-						<td>
-							<a href='edit.php?user_id=".$row['user_id']."'><button type='button'>Edit</button></a>
-							<a href='remove.php?user_id=".$row['user_id']."'><button type='button'>Remove</button></a>
-						</td>
+						<td> ".$row['restaurant_name']."</td>
+						<td> ".$row['restaurant_address']."</td>
+						<td>".$row['restaurant_category']."</td>
+						<td>".$row['restaurant_contact']."</td>
 					</tr>";
 				}
 			}

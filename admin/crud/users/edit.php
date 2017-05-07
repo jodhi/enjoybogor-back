@@ -45,6 +45,10 @@ if($_GET['user_id'])
 				<td><input type="text" name="user_name" placeholder="Name" value="<?php echo $data['user_name'] ?>" /></td>
 			</tr>
 			<tr>
+				<th>Username</th>
+				<td><input type="text" name="username" placeholder="Username" value="<?php echo $data['username'] ?>" /></td>
+			</tr>
+			<tr>
 				<th>Contact</th>
 				<td><input type="text" name="user_contact" placeholder="Contact" value="<?php echo $data['user_contact'] ?>" /></td>
 			</tr>

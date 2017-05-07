@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2017 at 06:34 AM
+-- Generation Time: May 07, 2017 at 05:36 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -73,17 +73,18 @@ CREATE TABLE `restaurants` (
   `restaurant_description` text NOT NULL,
   `latitude` double NOT NULL DEFAULT '0',
   `longitude` double NOT NULL DEFAULT '0',
-  `active` int(11) NOT NULL DEFAULT '0'
+  `active` int(11) NOT NULL DEFAULT '0',
+  `user` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 --
 -- Dumping data for table `restaurants`
 --
 
-INSERT INTO `restaurants` (`restaurant_id`, `menu_id`, `restaurant_name`, `restaurant_address`, `restaurant_category`, `restaurant_contact`, `restaurant_description`, `latitude`, `longitude`, `active`) VALUES
-(0, 0, 'Tidak Ada Restaurant', '-', 'none', 0, '-', 0, 0, 0),
-(1, 0, 'test', 'test', 'test', 5468, 'banyak lagi', 0, 0, 0),
-(2, 0, 'adsc', 'gvsgr', 'seffs', 0, 'sessegg', 0, 0, 0);
+INSERT INTO `restaurants` (`restaurant_id`, `menu_id`, `restaurant_name`, `restaurant_address`, `restaurant_category`, `restaurant_contact`, `restaurant_description`, `latitude`, `longitude`, `active`, `user`) VALUES
+(0, 0, 'Tidak Ada Restaurant', '-', 'none', 0, '-', 0, 0, 0, 0),
+(1, 0, 'test', 'test', 'test', 5468, 'banyak lagi', 0, 0, 2, 0),
+(2, 0, 'adsc', 'gvsgr', 'seffs', 0, 'sessegg', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -93,6 +94,7 @@ INSERT INTO `restaurants` (`restaurant_id`, `menu_id`, `restaurant_name`, `resta
 
 CREATE TABLE `users` (
   `user_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
   `user_name` varchar(255) NOT NULL,
   `date_signup` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `points` int(11) DEFAULT '0',
@@ -106,20 +108,8 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`user_id`, `user_name`, `date_signup`, `points`, `user_contact`, `email`, `password`, `active`) VALUES
-(6, 'Suryono', '2017-04-29 08:58:39', 0, 8123256, 'romano.diansyah@gmail.com', '1234', 0),
-(7, 'Nino', '2017-04-30 04:45:20', 0, 812, 'romano.diansyah@gmail.com', 'sd', 0),
-(8, 'Nino', '2017-04-30 04:52:49', 0, 1111, 'romano.diansyah@gmail.com', '03', 0),
-(9, 'Nino', '2017-04-30 13:10:36', 0, 81232465326, 'romano.diansyah@gmail.com', 'liasc', 0),
-(10, 'Malika', '2017-04-30 13:26:16', 0, 532, 'romano.diansyah@gmail.com', 'aisldk', 0),
-(11, 'ed', '2017-05-01 02:03:05', 0, 222, 'rb@bjg', 'jgh', 0),
-(12, '', '2017-05-02 14:08:49', 0, 0, '', '', 0),
-(13, 'referf', '2017-05-02 14:09:16', 0, 2323, 'romano.diansyah@gmail.com', 'dfv', 0),
-(14, 'Mohammad Romano Diansyah', '2017-05-03 09:21:53', 0, 81284863256, 'romano.diansyah@gmail.com', '7681ce2e5ff264a48c5c66708dd55c595164a904714efe4d766de921b95de60d', 0),
-(15, 'Tes', '2017-05-03 09:46:24', 0, 98943, 'rom@gmail', '31ec16b27a3a6b677a8e6dce9272521b3ae4f4364bcb9f61c2dc18e7115fa174', 0),
-(16, 'Mohammad Romano Diansyah', '2017-05-04 07:59:48', 0, 81284863256, 'romano.diansyah@gmail.com', 'cek', 0),
-(17, 'Romano', '2017-05-04 09:13:33', 0, 5, 'romano.diansyah@gmail.com', '88d4266fd4e6338d13b845fcf289579d209c897823b9217da3e161936f031589', 0),
-(18, 'jodhi', '2017-05-07 02:53:46', 0, 2315, 'jodhi@gmail.com', '53cad8e01bd4376c3c75f202a38176ecb23b73d6d76abaa3784db4913539008f', 1);
+INSERT INTO `users` (`user_id`, `username`, `user_name`, `date_signup`, `points`, `user_contact`, `email`, `password`, `active`) VALUES
+(0, 'admin', 'Admin', '2017-05-07 13:50:50', 0, 0, 'admin@enjoybogor.com', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 1);
 
 -- --------------------------------------------------------
 
@@ -167,7 +157,8 @@ ALTER TABLE `ratings_and_comments`
 --
 ALTER TABLE `restaurants`
   ADD PRIMARY KEY (`restaurant_id`),
-  ADD KEY `menu_id` (`menu_id`);
+  ADD KEY `menu_id` (`menu_id`),
+  ADD KEY `user` (`user`);
 
 --
 -- Indexes for table `users`
@@ -199,7 +190,7 @@ ALTER TABLE `restaurants`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `vouchers`
 --
@@ -226,7 +217,8 @@ ALTER TABLE `ratings_and_comments`
 -- Constraints for table `restaurants`
 --
 ALTER TABLE `restaurants`
-  ADD CONSTRAINT `restaurants_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`menu_id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `restaurants_ibfk_1` FOREIGN KEY (`menu_id`) REFERENCES `menus` (`menu_id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `restaurants_ibfk_2` FOREIGN KEY (`user`) REFERENCES `users` (`user_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
