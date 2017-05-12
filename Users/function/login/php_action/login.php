@@ -21,7 +21,9 @@ function login($username, $password)
         $_SESSION['user_id'] = $user_id;
         $_SESSION['user_name'] = $username;
         header("location:../home.php"); // jika berhasil login, maka masuk ke file home.php
+        return "true";
     } else {
         echo "Gagal Masuk"; // jika gagal, maka muncul teks gagal masuk
+        return "false";
     }
 }
