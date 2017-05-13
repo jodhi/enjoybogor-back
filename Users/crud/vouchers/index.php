@@ -24,6 +24,7 @@
 
 <div class="manageMember">
 	<a href="create.php"><button type="button">Add Voucher</button></a>
+	<a href="php_action/myvoucher.php"><button type="button">My voucher</button></a>
 	<a href="../../home.php"><button type="button">Home</button></a>
 	<table border="1" cellspacing="0" cellpadding="0">
 		<thead>
@@ -44,6 +45,7 @@
 			{
 				while($row = $result->fetch_assoc())
 				{
+					if($row['quantity']>0){
 					echo "
 					<tr>
 						<td> ".$row['voucher_name']."</td>
@@ -53,8 +55,9 @@
 						<td>
 							<a href='edit.php?voucher_id=".$row['voucher_id']."'><button type='button'>Edit</button></a>
 							<a href='remove.php?voucher_id=".$row['voucher_id']."'><button type='button'>Remove</button></a>
+							<a href='php_action/get.php?voucher_id=".$row['voucher_id']."'><button type='button'>Get</button></a>
 						</td>
-					</tr>";
+					</tr>";}
 				}
 			}
 				else
